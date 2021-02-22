@@ -1,5 +1,12 @@
-<center>
+{% extends 'base.html' %}
 
-<h1>Hello {{ user_name|lower }}</h1>
+{% block content %}
 
-<p>This is absolutely amazing!</p>
+    <center>
+
+    <h1>Hello {{ user_name|capitalize }}</h1>
+
+    </center>
+
+{% endblock %}
+
