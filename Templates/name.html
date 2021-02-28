@@ -2,27 +2,41 @@
 
 {% block content %}
 
-<center>
+{% for message in get_flashed_messages() %}
 
-    <h1>Hello World!</h1>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        Hey {{ name }} - {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{% endfor %}
 
-    <p>This is my first flask webpage!!!</p>
+{% if name %}
 
-    <p>My name is {{ first_name }}</p>
+    <h1>Hello {{ name }}!!!</h1>
+    <br/>
+    <img src="{{ url_for('static', filename='images/zenbook_duo.png') }}"
+    width="750">
+    <br/><br/>
+    <p id="demo">This is the best laptop in the world...</p>
 
-    <p>{{ stuff|safe }}</p>
+<script src="{{ url_for('static', filename='js/my_file.js') }}"></script>
 
-    <h3>Favorite Pizza:</h3>
+{% else %}
+    <h1>What's Your Name?</h1>
+    <br/>
+    <form method="POST">
+        {{ form.hidden_tag() }}
 
-    {% for topping in favorite_pizza %}
-    {% if topping == 77.77 %}
-    {{ topping + 100 }}<br/>
-    {% else %}
-    {{ topping }}<br/>
-    {% endif%}
-    {% endfor %}
+        {{ form.name.label(class="form-label") }}
 
-</center>
+        {{ form.name(class="form-control") }}
+        <br/>
+
+        {{ form.submit(class="btn btn-dark") }}
+
+    </form>
+
+{% endif %}
 
 {% endblock %}
 
