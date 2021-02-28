@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<center>
+
+    <h1>Hello World!</h1>
+
+    <p>This is my first flask webpage!!!</p>
+
+    <p>My name is {{ first_name }}</p>
+
+    <p>{{ stuff|safe }}</p>
+
+    <h3>Favorite Pizza:</h3>
+
+    {% for topping in favorite_pizza %}
+    {% if topping == 77.77 %}
+    {{ topping + 100 }}<br/>
+    {% else %}
+    {{ topping }}<br/>
+    {% endif%}
+    {% endfor %}
+
+</center>
+
+{% endblock %}
+

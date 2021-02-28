@@ -1,7 +1,16 @@
 from flask import Flask, render_template
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField
+from wtforms.validators import DataRequired
 
 # Create a Flask instance
 app = Flask(__name__)
+app.config['SECRET_KEY'] = "My super secret key that only I know about"
+
+
+class NamerForm(FlaskForm):
+    name = StringField("What's you name?", validators=[DataRequired()])
+    submit = SubmitField("Submit")
 
 
 # Create a route decorator
