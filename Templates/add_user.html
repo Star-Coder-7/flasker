@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    Hey {{ name }} - {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+
+{% if name %}
+
+    <h1>{{ name }} successfully added!!!</h1>
+    <br/><br/><br/>
+
+    <table class="table table-dark table-hover table-striped table-bordered">
+
+        {% for our_user in our_users %}
+        <tr>
+            <td>{{ our_user.id }}. <a href="{{ url_for('update', id=our_user.id) }}">{{ our_user.name }}</a> -
+                {{ our_user.email}} - {{ our_user.favourite_color }}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+{% else %}
+    <h1>User List:</h1>
+    <br/>
+<div class="shadow p-3 mb-5 bg-body rounded">
+    <form method="POST">
+    {{ form.hidden_tag() }}
+
+    {{ form.name.label(class="form-label") }}
+
+    {{ form.name(class="form-control") }}
+    <br/>
+
+    {{ form.email.label(class="form-label") }}
+
+    {{ form.email(class="form-control") }}
+    <br/>
+
+    {{ form.favourite_color.label(class="form-label") }}
+
+    {{ form.favourite_color(class="form-control") }}
+    <br/>
+
+    {{ form.submit(class="btn btn-dark") }}
+
+    </form>
+
+</div>
+
+<br/><br/><br/>
+
+<table class="table table-dark table-hover table-striped table-bordered">
+
+{% for our_user in our_users %}
+    <tr>
+        <td>{{ our_user.id }}. <a href="{{ url_for('update', id=our_user.id) }}">{{ our_user.name }}</a> -
+            {{ our_user.email}} - {{our_user.favourite_color }}</td>
+    </tr>
+{% endfor %}
+
+</table>
+{% endif %}
+
+{% endblock %}
